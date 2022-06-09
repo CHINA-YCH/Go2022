@@ -26,8 +26,8 @@ func TestLogOutput(t *testing.T) {
 	log.Info("info msg")
 	log.Warn("warn msg")
 	log.Error("error msg")
-	//log.Fatal("fatal msg")
-	//log.Panic("panic msg")
+	//log-d.Fatal("fatal msg")
+	//log-d.Panic("panic msg")
 
 	log.Infof("哈哈哈: %s", "world")
 	log.Warnf("警告:%s", "hello")

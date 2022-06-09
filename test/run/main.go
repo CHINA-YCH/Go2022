@@ -1,17 +1,12 @@
 package main
 
-import log "github.com/sirupsen/logrus"
+import (
+	logd "git.supremind.info/gobase/log-d"
+	log "github.com/sirupsen/logrus"
+)
 
 func main() {
-	log.SetLevel(log.DebugLevel)
-	log.SetReportCaller(true)
-	log.SetFormatter(&log.TextFormatter{
-		ForceQuote:      true, //键值对加引号
-		DisableColors:   true,
-		TimestampFormat: "2006-01-02 15:04:05", //时间格式
-		FullTimestamp:   true,
-	})
-
+	logd.SetLog()
 	Demo()
 }
 
