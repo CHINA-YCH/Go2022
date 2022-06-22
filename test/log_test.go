@@ -11,6 +11,15 @@ import (
 	"time"
 )
 
+func TestMap(t *testing.T) {
+	preCarsLane := make(map[string]int, 0)
+	if preCarsLane["11"] == 0 {
+		t.Log(preCarsLane["11"])
+	} else {
+		t.Logf("%v----", preCarsLane["11"])
+	}
+}
+
 func TestLogOutput(t *testing.T) {
 	log.Printf("")
 	log.SetFormatter(&log.TextFormatter{

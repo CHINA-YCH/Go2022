@@ -2,22 +2,55 @@ package main
 
 import (
 	"fmt"
-	"git.supremind.info/gobase/io/read-line"
+	readline "git.supremind.info/gobase/io/read-line"
+	"git.supremind.info/gobase/kafka/producer"
 	"github.com/Shopify/sarama"
 	"io/ioutil"
 	"log"
+	"net/http"
+	"runtime"
 	"strconv"
 	"time"
 )
 
 var (
-	host  = "127.0.0.1:9092"
-	topic = "jtsj_2498_20"
-	path  = "kafka/data/2498/2498_20.text"
+	host  = "100.100.142.15:32449"
+	topic = "vehicle_track"
+	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/track/001.txt"
 )
 
 func main() {
-	line, err := read_line.ReadLine(path)
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	go func() {
+		log.Println(http.ListenAndServe("0.0.0.0:6061", nil))
+	}()
+	Pro3()
+}
+
+func Pro3() {
+	msgSink, err := producer.NewKafkaSink(producer.SinkKafkaConfig{
+		Brokers:           []string{host},
+		Topic:             topic,
+		NumPartitions:     1,
+		ReplicationFactor: 2,
+	})
+	if err != nil {
+		log.Println("log=", err.Error())
+	}
+
+	exec := producer.NewExec(msgSink)
+	line, err := readline.ReadLine(path)
+	if err != nil {
+		log.Println("read error:", err)
+		panic(nil)
+	}
+	for _, v := range line {
+		exec.MsgProcess(v)
+	}
+
+}
+func Pro2() {
+	line, err := readline.ReadLine(path)
 	if err != nil {
 		log.Println("read error:", err)
 		panic(nil)
