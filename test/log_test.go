@@ -16,6 +16,21 @@ import (
 var lo sync.Mutex
 var MP = make(map[string]string, 0)
 
+func TestNil(t *testing.T) {
+	type speedInfo struct {
+		Speed *float64 `json:"speed"` // 给 * 默认值不会为""或0 而是nil
+		Plate *string  `json:"plate"`
+		Lane  *int     `json:"lane"`
+	}
+
+	var s1 = speedInfo{} // 指针默认不为空 {Speed:0 Plate: Lane:0}
+	if s1.Speed == nil {
+		t.Logf("- - - - - - - - - -%+v", s1)
+	} else {
+		t.Logf("===================%+v", s1)
+	}
+
+}
 func TestLock(t *testing.T) {
 
 	go func() {
