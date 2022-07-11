@@ -2,8 +2,6 @@ package producer
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 )
 
 var SinkInit MsgSink
@@ -26,12 +24,8 @@ type Sink struct {
 	Config       SinkKafkaConfig
 }
 
-func (s *Sink) Push(_ context.Context, msg interface{}) error {
-	msgStr, err := json.Marshal(msg)
-	if err != nil {
-		return fmt.Errorf("KafkaSink json.Marshal error: %v", err)
-	}
-	err = s.KafkaClient.SendMessage(s.DefaultTopic, string(msgStr))
+func (s *Sink) Push(_ context.Context, msg string) error {
+	err := s.KafkaClient.SendMessage(s.DefaultTopic, msg)
 	return err
 }
 

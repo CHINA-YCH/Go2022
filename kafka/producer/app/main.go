@@ -14,9 +14,10 @@ import (
 )
 
 var (
+	// ""100.100.142.15:32449 10.7.0.16:9092 100.100.142.232:9092 100.100.142.15:32449 100.100.152.232:9092
 	host  = "100.100.142.15:32449"
-	topic = "vehicle_track"
-	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/track/001.txt"
+	topic = "BOX.EVENT_VEHICLE_MODEL"
+	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/zdcl/002.txt"
 )
 
 func main() {
@@ -24,7 +25,9 @@ func main() {
 	go func() {
 		log.Println(http.ListenAndServe("0.0.0.0:6061", nil))
 	}()
-	Pro3()
+	for i := 0; i < 1; i++ {
+		Pro3()
+	}
 }
 
 func Pro3() {
@@ -32,7 +35,7 @@ func Pro3() {
 		Brokers:           []string{host},
 		Topic:             topic,
 		NumPartitions:     1,
-		ReplicationFactor: 2,
+		ReplicationFactor: 1,
 	})
 	if err != nil {
 		log.Println("log=", err.Error())
@@ -45,6 +48,7 @@ func Pro3() {
 		panic(nil)
 	}
 	for _, v := range line {
+		//time.Sleep(2 * time.Second)
 		exec.MsgProcess(v)
 	}
 

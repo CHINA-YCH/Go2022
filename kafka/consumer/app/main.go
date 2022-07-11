@@ -22,9 +22,9 @@ func init() {
 // 接收数据
 func main() {
 	Consumer01(Param{
-		Topic: "vehicle_track",
+		Topic: "BOX.EVENT_VEHICLE_MODEL", // "vehicle_track",
 		Host:  "100.100.142.15:32449",
-		Group: "track001",
+		Group: "track003",
 	})
 }
 

@@ -8,7 +8,7 @@ import (
 )
 
 type MsgSink interface {
-	Push(ctx context.Context, msg interface{}) error
+	Push(ctx context.Context, msg string) error
 	PushList(ctx context.Context, msgs []string) error
 }
 

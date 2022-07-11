@@ -1,15 +1,107 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"math/rand"
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
+
+var lo sync.Mutex
+var MP = make(map[string]string, 0)
+
+func TestLock(t *testing.T) {
+
+	go func() {
+		t.Log("- - - - -")
+		lo.Lock()
+		MP["a"] = "b"
+		lo.Unlock()
+	}()
+
+	go func() {
+		t.Log("xxxxxx")
+		lo.Lock()
+		MP["a"] = "a"
+		lo.Unlock()
+	}()
+
+	time.Sleep(3 * time.Second)
+	t.Log(MP)
+}
+func TestDel(t *testing.T) {
+	var push = []string{"a", "b", "c", "d"}
+	delIndex := 1
+	push = append(push[:delIndex], push[(delIndex+1):]...)
+	t.Log(push)
+}
+
+func TestSort2(t *testing.T) {
+	var l = []float64{1.0, 2.0, 0.5, 0.9, 14}
+	sort.SliceStable(l, func(i, j int) bool {
+		if i >= j {
+			return true
+		} else {
+			return false
+		}
+	})
+	sort.Float64s(l)
+	t.Log(l)
+}
+func TestTime(t *testing.T) {
+	now := time.Now().Unix()
+	time.Sleep(1 * time.Second)
+	now2 := time.Now().Unix()
+
+	dif := now2 - now
+	t.Log(dif)
+}
+func TestPrint(t *testing.T) {
+	type PlateInfo struct {
+		Speed  float64 `json:"speed" yaml:"speed"`
+		Number int     `json:"number" yaml:"number"`
+	}
+	var tempStruct = &PlateInfo{}
+	tempStruct.Speed = 11.2
+	tempStruct.Number = 12
+	marshal, _ := json.Marshal(tempStruct)
+	log.Info(string(marshal))
+	str := "2022-06-06 12:09:01 8888"
+	s := str[0:19]
+	log.Println(s)
+
+	ss := `{"speed":11.2,"number":12}`
+	tt := PlateInfo{}
+	err := json.Unmarshal([]byte(ss), &tt)
+	if err != nil {
+		log.Errorf("---%v,orgdata= %v\n", err, ss)
+	}
+
+	var a int = 12
+	var size int = 10
+	var sss int = a / size
+	log.Infof("----------%v", sss)
+}
+func TestFor(t *testing.T) {
+	mp := make(map[string]string, 0)
+	mp["a"] = "a"
+	mp["b"] = "b"
+	mp["c"] = "c"
+	mp2 := make(map[string]string, 0)
+	mp2["a"] = "a"
+	for k := range mp {
+		if mp2[k] != "" {
+			continue
+		}
+		t.Log("key=", k)
+	}
+}
 
 func TestMap(t *testing.T) {
 	preCarsLane := make(map[string]int, 0)
