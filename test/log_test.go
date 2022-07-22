@@ -25,6 +25,7 @@ var MP = make(map[string]string, 0)
 
 func TestPush(t *testing.T) {
 	t.Log(12344)
+	t.Log(12121)
 }
 func TestNil2(t *testing.T) {
 	var num *int
