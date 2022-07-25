@@ -24,7 +24,7 @@ func main() {
 	Consumer01(Param{
 		Topic: "jtsj_2498", // "vehicle_track", BOX.EVENT_VEHICLE_MODEL 100.100.142.15:32449 ; 10.4.0.113:9094 jtsj_2498;
 		Host:  "10.4.0.113:9094",
-		Group: "anatracer-105",
+		Group: "anatracer-107",
 	})
 }
 
