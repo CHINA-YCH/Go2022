@@ -22,6 +22,16 @@ import (
 
 var lo sync.Mutex
 var MP = make(map[string]string, 0)
+var TimeLayout = "2006-01-02 15:04:05"
+
+func TestSec(t *testing.T) {
+	sec := "2012-06-30 23:59:60"
+	location, err := time.ParseInLocation(TimeLayout, sec, time.Local)
+	if err != nil {
+		log.Errorf(" time format error: %v,origin data= %v,\n", err, sec)
+	}
+	t.Log("after parse: ", location)
+}
 
 func TestPush(t *testing.T) {
 	t.Log(12344)
