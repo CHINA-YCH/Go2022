@@ -24,6 +24,59 @@ var lo sync.Mutex
 var MP = make(map[string]string, 0)
 var TimeLayout = "2006-01-02 15:04:05"
 
+func TestTimeFormat(t *testing.T) {
+	now := time.Now()
+	add := now.Add(time.Duration(-6*24) * time.Hour)
+	t.Log(now)
+	t.Log(add)
+}
+func TestCountMap(t *testing.T) {
+	var mp = make(map[string]string, 0)
+	t.Log(len(mp))
+	mp["1"] = "1"
+	t.Log(len(mp))
+	mp["2"] = "2"
+	t.Log(len(mp))
+}
+
+func TestHalf(t *testing.T) {
+	total := 1
+	half := total / 2 // 0
+	half2 := 2 / 2    // 1
+	half3 := 3 / 2    // 1
+	half4 := 4 / 2    // 2
+	half5 := 5 / 2    // 2
+	half6 := 6 / 2    // 3
+	half7 := 7 / 2    // 3
+	t.Log(half, half2, half3, half4, half5, half6, half7)
+}
+
+func TestMp(t *testing.T) {
+	var thisBatchNew = make(map[string]map[string][]TempPlateInfo, 0)
+	m := thisBatchNew["xx"]
+	if len(m) == 0 {
+		t.Log("00000")
+	} else {
+		t.Log("11111")
+	}
+	//thisBatchNew["xx"] = make(map[string][]TempPlateInfo, 0)
+	thisBatchNew["xx"] = map[string][]TempPlateInfo{}
+	m2 := thisBatchNew["xx"]
+	if len(m2) == 0 {
+		t.Log("00000")
+	} else {
+		t.Log("11111")
+	}
+}
+
+type TempPlateInfo struct {
+	UID       string
+	Direction int
+	RelPos    float64
+	Lane      string
+	CamId     string
+}
+
 func TestSec(t *testing.T) {
 	sec := "2012-06-30 23:59:60"
 	location, err := time.ParseInLocation(TimeLayout, sec, time.Local)
@@ -124,8 +177,10 @@ func TestQueue(t *testing.T) {
 	linkList.PushBack("b")
 	linkList.PushBack("c")
 	linkList.PushBack("d")
-	v := linkList.Front().Value // 取出第一个元素
+	v := linkList.Front().Value       // 取出第一个元素
+	linkList.Remove(linkList.Front()) // 移除第一个元素
 	t.Log(v)
+	t.Log("- - - - ")
 
 	for head := linkList.Front(); head != nil; head = head.Next() {
 		//var value interface{}
