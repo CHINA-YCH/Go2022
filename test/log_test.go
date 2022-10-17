@@ -2,6 +2,7 @@ package test
 
 import (
 	"container/list"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -24,12 +25,114 @@ var lo sync.Mutex
 var MP = make(map[string]string, 0)
 var TimeLayout = "2006-01-02 15:04:05"
 
+func a() (int, bool) {
+	errFlag := false
+	defer func() {
+		if err := recover(); err != nil {
+			errFlag = true
+			fmt.Printf("remote config not Complete use history config, remote config")
+		}
+	}()
+	s := 1 / 0
+	return s, errFlag
+}
+
+func TestRet(t *testing.T) {
+	r, flag := a()
+	t.Log(r, flag)
+}
+
+func TestSub(t *testing.T) {
+	// 1661999847
+	minuteInt, _ := strconv.ParseInt("1661999847", 10, 64)
+	formatTimeStr := time.Unix(minuteInt, 0).Format("2006-01-02 15:04:05")
+	t.Log(formatTimeStr[:17] + "00")
+	t.Log(formatTimeStr[:17] + "59")
+}
+
+func TestTimeDefault(t *testing.T) {
+	var lastNtpTime time.Time
+	t.Log(lastNtpTime)
+}
+
+type (
+	Fun     func(int) int
+	Functor func(Functor) Fun
+)
+
+func Y(f func(Fun) Fun) Fun {
+	return func(g Functor) Fun {
+		return g(g)
+	}(func(r Functor) Fun {
+		return func(n int) int {
+			return f(r(r))(n)
+		}
+	})
+}
+
+func ExampleY() {
+	fact := Y(func(r Fun) Fun {
+		return func(n int) int {
+			if n == 0 {
+				return 1
+			}
+			return n * r(n-1)
+		}
+	})
+	fmt.Println(fact(5))
+	// Output: 120
+}
+
+func TestD(t *testing.T) {
+
+}
+
+func TestZdclHttpGetV2(t *testing.T) {
+	c := http.Client{}
+	req, err := http.NewRequest("GET", "http://100.100.140.2:3001/v1/test", nil)
+	if err != nil {
+		return
+	}
+	ctx, cancelFunc := context.WithTimeout(context.Background(), time.Second*3)
+	defer cancelFunc()
+	withContext := req.WithContext(ctx)
+	resp, err := c.Do(withContext)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	fmt.Println(string(body))
+	fmt.Println(err)
+}
+
+func TestZdclHttpGet(t *testing.T) {
+	c := http.Client{
+		Timeout: time.Second * 2,
+	}
+	req, err := http.NewRequest("GET", "http://100.100.140.2:3001/v1/test", strings.NewReader(""))
+	if err != nil {
+		panic(err)
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	fmt.Println(string(body))
+	fmt.Println(err)
+}
+
 func TestTimeFormat(t *testing.T) {
 	now := time.Now()
 	add := now.Add(time.Duration(-6*24) * time.Hour)
 	t.Log(now)
 	t.Log(add)
 }
+
 func TestCountMap(t *testing.T) {
 	var mp = make(map[string]string, 0)
 	t.Log(len(mp))
@@ -90,6 +193,7 @@ func TestPush(t *testing.T) {
 	t.Log(12344)
 	t.Log(12121)
 }
+
 func TestNil2(t *testing.T) {
 	var num *int
 	var num2 int
