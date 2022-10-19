@@ -21,6 +21,13 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+func TestDiff(t *testing.T) {
+	now := time.Now()
+	nowUnix := now.Unix()
+	afterUnix := now.Add(100 * time.Hour).Unix()
+	t.Log(afterUnix - nowUnix)
+}
+
 var lo sync.Mutex
 var MP = make(map[string]string, 0)
 var TimeLayout = "2006-01-02 15:04:05"
@@ -33,7 +40,7 @@ func a() (int, bool) {
 			fmt.Printf("remote config not Complete use history config, remote config")
 		}
 	}()
-	s := 1 / 0
+	s := 1 / 1
 	return s, errFlag
 }
 
