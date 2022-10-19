@@ -1,9 +1,0 @@
-{"id":"gantry1","direction":0,"avg_speed":75,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":75,"rel_position":0.14036505086774393,"abs_position":0}]}
-{"id":"gantry1","direction":0,"avg_speed":85,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":75,"rel_position":0.24036505086774393,"abs_position":0}]}
-{"id":"gantry1","direction":0,"avg_speed":75,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":75,"rel_position":0.34036505086774393,"abs_position":0}]}
-{"id":"gantry2","direction":0,"avg_speed":85,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":75,"rel_position":0.44036505086774393,"abs_position":0}]}
-{"id":"gantry3","direction":0,"avg_speed":87,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":75,"rel_position":0.54036505086774393,"abs_position":0}]}
-{"id":"gantry4","direction":0,"avg_speed":88,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":75,"rel_position":0.64036505086774393,"abs_position":0}]}
-{"id":"gantry4","direction":0,"avg_speed":78,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":95,"rel_position":0.84036505086774393,"abs_position":0}]}
-{"id":"gantry5","direction":0,"avg_speed":77,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":95,"rel_position":0.94036505086774393,"abs_position":0}]}
-{"id":"gantry5","direction":0,"avg_speed":76,"vehicle_number":1,"points":[{"plate":"浙A40001","lane":0,"speed":95,"rel_position":0.999036505086774393,"abs_position":0}]}

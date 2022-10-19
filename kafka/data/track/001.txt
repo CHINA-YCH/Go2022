@@ -1,1 +1,0 @@
-{"data":[{"id":"001","direction":0,"avg_speed":98.11,"vehicle_number":3,"points":[{"plate":"浙F3TC00","lane":1},{"plate":"浙F3TC01","lane":1},{"plate":"浙F3TC02","lane":0}]},{"id":"002","direction":0,"avg_speed":78.11,"vehicle_number":4,"points":[{"plate":"浙F3TC00","lane":1},{"plate":"浙F3TC01","lane":1},{"plate":"浙F3TC02","lane":0},{"plate":"浙F3TC03","lane":2}]}]}
