@@ -3,6 +3,7 @@ package routes
 import (
 	"git.supremind.info/gobase/veno-gin/app/common/request"
 	"git.supremind.info/gobase/veno-gin/app/controllers/app"
+	"git.supremind.info/gobase/veno-gin/app/controllers/common"
 	"git.supremind.info/gobase/veno-gin/app/middleware"
 	"git.supremind.info/gobase/veno-gin/app/services"
 	"github.com/gin-gonic/gin"
@@ -25,6 +26,7 @@ func SetApiGroupRoutes(router *gin.RouterGroup) {
 	{
 		authRouter.POST("/auth/info", app.Info)
 		authRouter.POST("/auth/logout", app.Logout)
+		authRouter.POST("/image_upload", common.ImageUpload)
 	}
 
 	router.GET("/ping", func(context *gin.Context) {
