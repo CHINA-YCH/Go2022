@@ -4,6 +4,7 @@ import (
 	"git.supremind.info/gobase/veno-gin/app/common/request"
 	"git.supremind.info/gobase/veno-gin/app/common/response"
 	"git.supremind.info/gobase/veno-gin/app/services"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,4 +25,13 @@ func Login(c *gin.Context) {
 		}
 		response.Success(c, tokenData)
 	}
+}
+
+func Logout(c *gin.Context) {
+	err := services.JwtService.JoinBlackList(c.Keys["token"].(*jwt.Token))
+	if err != nil {
+		response.BusinessFail(c, "登出失败")
+		return
+	}
+	response.Success(c, nil)
 }
