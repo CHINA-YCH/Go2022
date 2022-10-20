@@ -4,12 +4,29 @@ import (
 	"git.supremind.info/gobase/veno-gin/global"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 )
 
 type Response struct {
 	ErrorCode int         `json:"error_code"` // 自定义错误码
 	Data      interface{} `json:"data"`       // 数据
 	Message   string      `json:"message"`    // 信息
+}
+
+func ServerError(c *gin.Context, err interface{}) {
+	msg := "Internal Server Error"
+	// 非生产环境显示具体错误信息
+	if global.App.Config.App.Env != "production" && os.Getenv(gin.EnvGinMode) != gin.ReleaseMode {
+		if _, ok := err.(error); ok {
+			msg = err.(error).Error()
+		}
+	}
+	c.JSON(http.StatusInternalServerError, Response{
+		http.StatusInternalServerError,
+		nil,
+		msg,
+	})
+	c.Abort()
 }
 
 // Success 响应成功 ErrorCode 为 0 表示成功
