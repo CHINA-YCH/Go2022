@@ -31,3 +31,10 @@ func ValidateFail(c *gin.Context, msg string) {
 func BusinessFail(c *gin.Context, msg string) {
 	Fail(c, global.Errors.BusinessError.ErrorCode, msg)
 }
+func FailByError(c *gin.Context, error global.CustomError) {
+	Fail(c, error.ErrorCode, error.ErrorMsg)
+}
+
+func TokenFail(c *gin.Context) {
+	FailByError(c, global.Errors.TokenError)
+}

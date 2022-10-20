@@ -7,6 +7,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func Info(c *gin.Context) {
+	err, user := services.UserService.GetUserInfo(c.Keys["id"].(string))
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	}
+	response.Success(c, user)
+}
+
 /*
 新建 app/controllers/app/user.go 文件，校验入参，调用 UserService 注册逻辑
 */
