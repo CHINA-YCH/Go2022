@@ -15,9 +15,9 @@ import (
 
 var (
 	// ""100.100.142.15:32449 10.7.0.16:9092 100.100.142.232:9092 100.100.142.15:32449 100.100.152.232:9092 10.4.0.113:9094 jtsj_2498
-	host  = "10.4.0.113:9094"
-	topic = "jtsj_2498"
-	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/zdcl/002.txt"
+	host  = "100.100.142.132:9092"
+	topic = "BOX.EVENT_VEHICLE_MODEL"
+	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/zdcl/004.txt"
 )
 
 func main() {
