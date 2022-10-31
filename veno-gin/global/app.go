@@ -1,6 +1,9 @@
 package global
 
-import "git.supremind.info/gobase/veno-gin/config"
+import (
+	"git.supremind.info/gobase/veno-gin/config"
+	"go.uber.org/zap"
+)
 import "github.com/spf13/viper"
 
 /*
@@ -14,6 +17,7 @@ import "github.com/spf13/viper"
 type Application struct {
 	ConfigViper *viper.Viper
 	Config      config.Configuration
+	Log         *zap.Logger
 }
 
 var App = new(Application)
