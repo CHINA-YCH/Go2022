@@ -38,5 +38,8 @@ func main() {
 		// 启动服务
 		_ = r.Run(":" + global.App.Config.App.Port)
 	*/
+	// 初始化验证器
+	bootstrap.InitializeValidator()
+
 	bootstrap.RunServer()
 }
