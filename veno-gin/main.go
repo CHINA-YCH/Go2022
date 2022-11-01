@@ -44,5 +44,8 @@ func main() {
 	// 初始化Redis
 	global.App.Redis = bootstrap.InitializeRedis()
 
+	// 初始化文件系统
+	bootstrap.InitializeStorage()
+
 	bootstrap.RunServer()
 }

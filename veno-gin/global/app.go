@@ -3,6 +3,7 @@ package global
 import (
 	"git.supremind.info/gobase/veno-gin/config"
 	"github.com/go-redis/redis/v8"
+	"github.com/jassue/go-storage/storage"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
@@ -25,3 +26,16 @@ type Application struct {
 }
 
 var App = new(Application)
+
+func (app *Application) Disk(disk ...string) storage.Storage {
+	// 若未传参，默认使用配置文件驱动
+	diskName := app.Config.Storage.Default
+	if len(disk) > 0 {
+		diskName = storage.DiskName(disk[0])
+	}
+	s, err := storage.Disk(diskName)
+	if err != nil {
+		panic(err)
+	}
+	return s
+}

@@ -17,26 +17,27 @@ import (
  */
 
 func SetApiGroupRoutes(router *gin.RouterGroup) {
-	router.POST("/auth/register", app.Register)
-
-	router.GET("/ping", func(context *gin.Context) {
-		context.String(http.StatusOK, "pong")
-	})
-	router.GET("/test", func(context *gin.Context) {
-		time.Sleep(5 * time.Second)
-		context.String(http.StatusOK, "success")
-	})
-
-	router.POST("/user/register", func(context *gin.Context) {
-		var form request.Register
-		if err := context.ShouldBindJSON(&form); err != nil {
-			context.JSON(http.StatusOK, gin.H{
-				"error": request.GetErrorMsg(form, err),
-			})
-			return
-		}
-		context.JSON(http.StatusOK, gin.H{
-			"message": "success",
+	r := router.Group("")
+	{
+		r.POST("/auth/register", app.Register)
+		r.GET("/ping", func(context *gin.Context) {
+			context.String(http.StatusOK, "pong")
 		})
-	})
+		r.GET("/test", func(context *gin.Context) {
+			time.Sleep(5 * time.Second)
+			context.String(http.StatusOK, "success")
+		})
+		r.POST("/user/register", func(context *gin.Context) {
+			var form request.Register
+			if err := context.ShouldBindJSON(&form); err != nil {
+				context.JSON(http.StatusOK, gin.H{
+					"error": request.GetErrorMsg(form, err),
+				})
+				return
+			}
+			context.JSON(http.StatusOK, gin.H{
+				"message": "success",
+			})
+		})
+	}
 }
