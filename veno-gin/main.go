@@ -3,8 +3,6 @@ package main
 import (
 	"git.supremind.info/gobase/veno-gin/bootstrap"
 	"git.supremind.info/gobase/veno-gin/global"
-	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 /*
@@ -31,13 +29,14 @@ func main() {
 			_ = db.Close()
 		}
 	}()
-	r := gin.Default()
-
-	// 测试路由
-	r.GET("/ping", func(context *gin.Context) {
-		context.String(http.StatusOK, "pong")
-	})
-
-	// 启动服务
-	_ = r.Run(":" + global.App.Config.App.Port)
+	/*
+		r := gin.Default()
+		// 测试路由
+		r.GET("/ping", func(context *gin.Context) {
+			context.String(http.StatusOK, "pong")
+		})
+		// 启动服务
+		_ = r.Run(":" + global.App.Config.App.Port)
+	*/
+	bootstrap.RunServer()
 }
