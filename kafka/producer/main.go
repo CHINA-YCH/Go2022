@@ -7,7 +7,6 @@ import (
 	"github.com/Shopify/sarama"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"runtime"
 	"strconv"
 	"time"
@@ -15,17 +14,17 @@ import (
 
 var (
 	// ""100.100.142.15:32449 10.7.0.16:9092 100.100.142.232:9092 100.100.142.15:32449 100.100.152.232:9092 10.4.0.113:9094 jtsj_2498
-	host  = "100.100.142.132:9092"
-	topic = "BOX.EVENT_VEHICLE_MODEL"
-	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/zdcl/004.txt"
+	//host  = "100.100.142.132:9092"
+	//topic = "BOX.EVENT_VEHICLE_MODEL"
+	// path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/zdcl/004.txt"
+	host  = "100.100.142.177:9092"
+	topic = "jtcs_2740"
+	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/2740/2740.txt"
 )
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	go func() {
-		log.Println(http.ListenAndServe("0.0.0.0:6061", nil))
-	}()
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 100; i++ {
 		Pro3()
 	}
 }
@@ -48,7 +47,7 @@ func Pro3() {
 		panic(nil)
 	}
 	for _, v := range line {
-		//time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 		exec.MsgProcess(v)
 	}
 
