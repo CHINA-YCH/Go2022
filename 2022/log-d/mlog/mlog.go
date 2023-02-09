@@ -1,7 +1,7 @@
 package mlog
 
 import (
-	"git.supremind.info/gobase/log-d/formatter"
+	formatter2 "git.supremind.info/gobase/2022/log-d/formatter"
 	"github.com/sirupsen/logrus"
 	"os"
 )
@@ -13,11 +13,11 @@ type Log struct {
 }
 
 func NewLog() *Log {
-	mLog := logrus.New()                         // 新建一个实例
-	mLog.SetOutput(os.Stderr)                    // 设置输出类型
-	mLog.SetReportCaller(true)                   // 开启返回函数名和行号
-	mLog.SetFormatter(&formatter.LogFormatter{}) // 设置自己定义的Formatter
-	mLog.SetLevel(logrus.DebugLevel)             // 设置最低的Level
+	mLog := logrus.New()                          // 新建一个实例
+	mLog.SetOutput(os.Stderr)                     // 设置输出类型
+	mLog.SetReportCaller(true)                    // 开启返回函数名和行号
+	mLog.SetFormatter(&formatter2.LogFormatter{}) // 设置自己定义的Formatter
+	mLog.SetLevel(logrus.DebugLevel)              // 设置最低的Level
 	return &Log{
 		log: mLog,
 	}

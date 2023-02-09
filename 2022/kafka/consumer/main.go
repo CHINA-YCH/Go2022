@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"git.supremind.info/gobase/io/read-line/write"
-	"git.supremind.info/gobase/kafka/consumer/api"
-	logd "git.supremind.info/gobase/log-d"
+	write2 "git.supremind.info/gobase/2022/io/read-line/write"
+	api2 "git.supremind.info/gobase/2022/kafka/consumer/api"
+	"git.supremind.info/gobase/2022/log-d"
 	"github.com/Shopify/sarama"
 	log "github.com/sirupsen/logrus"
 	"os"
@@ -18,12 +18,12 @@ type Param struct {
 }
 
 func init() {
-	logd.SetLog()
+	log_d.SetLog()
 }
 
 // 接收数据
 func main() {
-	file := write.DoWriteFile("/Users/hanchaoyue/Go2022/Go2022/kafka/data/2498-2/15-16.text")
+	file := write2.DoWriteFile("/Users/hanchaoyue/Go2022/Go2022/kafka/data/2498-2/15-16.text")
 	Consumer01(file, Param{
 		// 10.4.0.113:9094 - tst
 		// 10.4.0.113:9095 - log4j 10.4.0.110:21361
@@ -59,7 +59,7 @@ func Consumer01(file *os.File, cf Param) {
 	for {
 		// 需要监听的主题
 		topics := []string{cf.Topic}
-		handler := api.MyConsumer{File: file}
+		handler := api2.MyConsumer{File: file}
 		// 启动kafka消费组模式，消费的逻辑在上面的 ConsumeClaim 这个方法里
 		err = group.Consume(ctx, topics, handler)
 		if err != nil {

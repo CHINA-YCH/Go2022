@@ -1,7 +1,7 @@
 package main
 
 import (
-	"git.supremind.info/gobase/log-d/ketty"
+	ketty2 "git.supremind.info/gobase/2022/log-d/ketty"
 	"github.com/op/go-logging"
 )
 
@@ -18,7 +18,7 @@ var log = logging.MustGetLogger("example")
 
 */
 func init() {
-	ketty.SetLog()
+	ketty2.SetLog()
 }
 
 func main() {

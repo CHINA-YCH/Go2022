@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"git.supremind.info/gobase/io/read-line/read"
-	"git.supremind.info/gobase/kafka/producer/api"
+	read2 "git.supremind.info/gobase/2022/io/read-line/read"
+	api2 "git.supremind.info/gobase/2022/kafka/producer/api"
 	"github.com/Shopify/sarama"
 	"io/ioutil"
 	"log"
@@ -30,7 +30,7 @@ func main() {
 }
 
 func Pro3() {
-	msgSink, err := api.NewKafkaSink(api.SinkKafkaConfig{
+	msgSink, err := api2.NewKafkaSink(api2.SinkKafkaConfig{
 		Brokers:           []string{host},
 		Topic:             topic,
 		NumPartitions:     1,
@@ -40,8 +40,8 @@ func Pro3() {
 		log.Println("log=", err.Error())
 	}
 
-	exec := api.NewExec(msgSink)
-	line, err := read.ReadLine(path)
+	exec := api2.NewExec(msgSink)
+	line, err := read2.ReadLine(path)
 	if err != nil {
 		log.Println("read error:", err)
 		panic(nil)
@@ -53,7 +53,7 @@ func Pro3() {
 
 }
 func Pro2() {
-	line, err := read.ReadLine(path)
+	line, err := read2.ReadLine(path)
 	if err != nil {
 		log.Println("read error:", err)
 		panic(nil)

@@ -1,12 +1,12 @@
 package main
 
 import (
-	logd "git.supremind.info/gobase/log-d"
+	"git.supremind.info/gobase/2022/log-d"
 	log "github.com/sirupsen/logrus"
 )
 
 func main() {
-	logd.SetLog()
+	log_d.SetLog()
 	Demo()
 }
 
