@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -14,8 +13,10 @@ import (
  * @Date: 2023-02-13 19:40:03
  */
 func main() {
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	server := NewHttpServer("server-test")
+	//server.Route("/", handler)
+	server.Route("/sign", SignUp)
+	server.Start(":8080")
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
