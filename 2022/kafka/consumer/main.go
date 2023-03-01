@@ -9,6 +9,7 @@ import (
 	"github.com/Shopify/sarama"
 	log "github.com/sirupsen/logrus"
 	"os"
+	"time"
 )
 
 type Param struct {
@@ -24,12 +25,13 @@ func init() {
 // 接收数据
 func main() {
 	file := write2.DoWriteFile("/Users/hanchaoyue/Go2022/Go2022/2022/kafka/data/2498/2498_00.text")
+	go api2.BatchProcess()
 	Consumer01(file, Param{
 		// 10.4.0.113:9094 - tst
 		// 10.4.0.113:9095 - log4j 10.4.0.110:21361
 		Topic: "jtsj_2416", // "vehicle_track", BOX.EVENT_VEHICLE_MODEL 100.100.142.15:32449 ; 10.4.0.113:9094 jtsj_2498; nb_2498 10.4.0.113:9094
 		Host:  "100.100.142.177:9092",
-		Group: "anatracer-1023",
+		Group: fmt.Sprint(time.Now()),
 	})
 }
 
@@ -39,7 +41,7 @@ func Consumer01(file *os.File, cf Param) {
 	// Version 必须大于等于  V0_10_2_0
 	config.Version = sarama.V0_10_2_1
 	config.Consumer.Return.Errors = true
-	config.Consumer.Offsets.Initial = sarama.OffsetNewest
+	config.Consumer.Offsets.Initial = sarama.OffsetOldest
 	log.Infof("start connect kafka . . . . . . ")
 	// 开始连接kafka服务器
 	group, err := sarama.NewConsumerGroup([]string{cf.Host}, cf.Group, config)
