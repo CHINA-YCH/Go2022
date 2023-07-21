@@ -29,7 +29,7 @@ func main() {
 	Consumer01(file, Param{
 		// 10.4.0.113:9094 - tst
 		// 10.4.0.113:9095 - log4j 10.4.0.110:21361
-		Topic: "jtsj_2416", // "vehicle_track", BOX.EVENT_VEHICLE_MODEL 100.100.142.15:32449 ; 10.4.0.113:9094 jtsj_2498; nb_2498 10.4.0.113:9094
+		Topic: "jtsj_tunnel_changtong_0", // "vehicle_track", BOX.EVENT_VEHICLE_MODEL 100.100.142.15:32449 ; 10.4.0.113:9094 jtsj_2498; nb_2498 10.4.0.113:9094
 		Host:  "100.100.142.177:9092",
 		Group: fmt.Sprint(time.Now()),
 	})

@@ -17,16 +17,18 @@ var (
 	//host  = "100.100.142.132:9092"
 	//topic = "BOX.EVENT_VEHICLE_MODEL"
 	// path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/zdcl/004.txt"
-	host  = "100.100.142.177:9092"
-	topic = "jtcs_2740"
-	path  = "/Users/hanchaoyue/Go2022/Go2022/kafka/data/2740/2740.txt"
+	host  = "10.19.0.43:9092"
+	topic = "BOX.EVENT_VEHICLE_MODEL"
+	//path  = "/Users/hanchaoyue/Go2022/Go2022/2022/kafka/data/zdcl/005.txt"
+	//path = "/Users/hanchaoyue/Go2022/Go2022/2022/kafka/data/zdcl/006.txt"
+	path = "/Users/hanchaoyue/Go2022/Go2022/2022/kafka/data/zdcl/007.txt"
 )
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	for i := 0; i < 100; i++ {
-		Pro3()
-	}
+	//for i := 0; i < 100; i++ {
+	Pro3()
+	//}
 }
 
 func Pro3() {
@@ -47,11 +49,13 @@ func Pro3() {
 		panic(nil)
 	}
 	for _, v := range line {
-		time.Sleep(1 * time.Second)
+		//time.Sleep(1 * time.Second)
+		time.Sleep(50 * time.Nanosecond)
 		exec.MsgProcess(v)
 	}
 
 }
+
 func Pro2() {
 	line, err := read2.ReadLine(path)
 	if err != nil {
@@ -62,6 +66,7 @@ func Pro2() {
 		Producer2(v)
 	}
 }
+
 func Producer2(value string) {
 	config := sarama.NewConfig()
 	// 等待服务器所有副本都保存成功后的响应
